@@ -20,24 +20,20 @@ import com.example.messages.CustomMessages;
 
 public abstract class DirectoryProcessor {
 
-    private int executorSize = 10;
-    protected Logger logger = LoggerFactory.getLogger(getClass());
-
-    public DirectoryProcessor() {
-
-    }
+    private int executorSize;
+    protected static final Logger LOGGER = LoggerFactory.getLogger(
+                DirectoryProcessor.class);
 
     public DirectoryProcessor(int executorSize) {
 
         this.executorSize = executorSize;
-
     }
 
     public abstract IFileMerger getFileMerger(final BlockingQueue<File> blockingQueue);
 
     public File processDirectory(File directory) {
         if (!directory.isDirectory()) {
-            logger.error(CustomMessages.INCORRECT_DIRECTORY_SPECIFIED);
+            LOGGER.error(CustomMessages.INCORRECT_DIRECTORY_SPECIFIED);
         }
         File[] files = directory.listFiles();
         List<File> chunkedFiles = invokeFileChunking(files);
@@ -112,10 +108,10 @@ public abstract class DirectoryProcessor {
                     }
                 }
             }
-            executorService.shutdown();
+            executorService.shutdownNow();
             return outputFilesPostChunk;
         } catch (Exception exception) {
-            logger.error(
+            LOGGER.error(
                         CustomMessages.EXCEPTION_DURING_FILE_CHUNKING_INVOCATION.concat(
                                     CustomMessages.EXCEPTION_MESSAGE_PLACEHOLDER),
                         exception.getMessage());

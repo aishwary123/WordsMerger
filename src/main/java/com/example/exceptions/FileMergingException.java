@@ -12,4 +12,8 @@ public class FileMergingException extends RuntimeException {
         this.message = message;
     }
 
+    @Override
+    public String getMessage() {
+        return this.message;
+    }
 }

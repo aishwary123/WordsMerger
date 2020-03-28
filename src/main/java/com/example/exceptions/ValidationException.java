@@ -1,7 +1,6 @@
 package com.example.exceptions;
 
-public class ValidationException extends RuntimeException
-             {
+public class ValidationException extends RuntimeException {
 
     /**
      * 
@@ -11,6 +10,11 @@ public class ValidationException extends RuntimeException
 
     public ValidationException(String message) {
         this.message = message;
+    }
+
+    @Override
+    public String getMessage() {
+        return this.message;
     }
 
 }

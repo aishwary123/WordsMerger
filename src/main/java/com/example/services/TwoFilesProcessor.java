@@ -9,6 +9,10 @@ import com.example.messages.CustomMessages;
 
 public class TwoFilesProcessor extends DirectoryProcessor {
 
+    public TwoFilesProcessor(final int executorSize) {
+        super(executorSize);
+    }
+
     @Override
     public IFileMerger getFileMerger(BlockingQueue<File> queue) {
 
@@ -17,7 +21,7 @@ public class TwoFilesProcessor extends DirectoryProcessor {
             File file2 = queue.poll();
             return new TwoFileMerger(file1, file2);
         } catch (IOException ioException) {
-            logger.error(
+            LOGGER.error(
                         CustomMessages.EXCEPTION_DURING_FILE_MERGER_INSTANCE_CREATION.concat(
                                     CustomMessages.EXCEPTION_MESSAGE_PLACEHOLDER),
                         ioException.getMessage());

@@ -15,6 +15,12 @@ public class CustomMessages {
     public static final String EXCEPTION_DURING_FILE_CLOSE_OPERATION = "Exception during file close operation";
     public static final String EXCEPTION_DURING_FILE_DELETE_OPERATION = "Exception during file delete operation";
     public static final String INCORRECT_DIRECTORY_SPECIFIED = "Incorrect directory specified";
+    public static final String SOURCE_DIRECTORY_VALUE_MISSING = "Source Directory values missing";
+    public static final String WORDS_MERGE_OPERATION_FAILED = "Words merge operation failed";
+    public static final String INCORRECT_PROCESSOR_TYPE_SPECIFIED = "Incorrect processor type specified";
+    public static final String SYSTEM_VARIABLE_NOT_FOUND = "system variable not found";
+
     public static final String EXCEPTION_MESSAGE_PLACEHOLDER = ":{}";
     public static final String UTILITY_CLASS = "Utility Class: Instance can not be created";
+    public static final String FACTORY_CLASS = "Factory Class: Instance can not be created";
 }
