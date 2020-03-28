@@ -19,8 +19,9 @@ public class DirectoryProcessorFactory {
 
     public static DirectoryProcessor getDirectoryProcessorInstance() {
         Properties systemConfig = (Properties) BeanUtil.getBean("systemConfig");
-        if (getDirectoryProcessorType(
-                    systemConfig) == DirectoryProcessorType.TWO_FILES_PROCESSOR) {
+        if (DirectoryProcessorType.fromOrdinal(
+                    Integer.parseInt(systemConfig.getProperty(
+                                FILE_MERGE_SIZE))) == DirectoryProcessorType.TWO_FILES_PROCESSOR) {
             int executorSize = Integer.parseInt(
                         systemConfig.getProperty(EXECUTOR_SIZE));
             return new TwoFilesProcessor(executorSize);
@@ -29,13 +30,4 @@ public class DirectoryProcessorFactory {
                     CustomMessages.INCORRECT_PROCESSOR_TYPE_SPECIFIED);
     }
 
-    private static DirectoryProcessorType getDirectoryProcessorType(final Properties systemConfig) {
-        int fileMergeSize = Integer.parseInt(
-                    systemConfig.getProperty(FILE_MERGE_SIZE));
-        switch (fileMergeSize) {
-            case 2:
-                return DirectoryProcessorType.TWO_FILES_PROCESSOR;
-        }
-        return null;
-    }
 }
