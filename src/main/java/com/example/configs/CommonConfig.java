@@ -6,14 +6,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.example.exceptions.VariableNotFoundException;
 import com.example.utils.SystemUtils;
 
 @Configuration
 public class CommonConfig {
 
-    private static final String EXECUTOR_SIZE = "EXECUTOR_SIZE";
-    private static final String FILE_MERGE_SIZE = "FILE_MERGE_SIZE";
+    public static final String EXECUTOR_SIZE = "EXECUTOR_SIZE";
+    public static final String FILE_MERGE_SIZE = "FILE_MERGE_SIZE";
 
     @Value("${EXECUTOR_SIZE}")
     private String defaultExecutorSize;
@@ -22,17 +21,16 @@ public class CommonConfig {
     private String defaultFileMergeSize;
 
     @Bean
-    public Properties systemConfig()
-        throws VariableNotFoundException {
+    public Properties systemConfigs() {
 
         final String executorSize = SystemUtils.getSystemVariableOrDefault(
                     EXECUTOR_SIZE, defaultExecutorSize);
         final String fileMergeSize = SystemUtils.getSystemVariableOrDefault(
                     FILE_MERGE_SIZE, defaultFileMergeSize);
-        Properties systemConfig = new Properties();
-        systemConfig.setProperty(EXECUTOR_SIZE, executorSize);
-        systemConfig.setProperty(FILE_MERGE_SIZE, fileMergeSize);
-        return systemConfig;
+        Properties systemConfigs = new Properties();
+        systemConfigs.setProperty(EXECUTOR_SIZE, executorSize);
+        systemConfigs.setProperty(FILE_MERGE_SIZE, fileMergeSize);
+        return systemConfigs;
     }
 
 }

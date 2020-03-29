@@ -18,12 +18,13 @@ public class DirectoryProcessorFactory {
     }
 
     public static DirectoryProcessor getDirectoryProcessorInstance() {
-        Properties systemConfig = (Properties) BeanUtil.getBean("systemConfig");
+        Properties systemConfigs = (Properties) BeanUtil.getBean(
+                    "systemConfigs");
         if (DirectoryProcessorType.fromOrdinal(
-                    Integer.parseInt(systemConfig.getProperty(
+                    Integer.parseInt(systemConfigs.getProperty(
                                 FILE_MERGE_SIZE))) == DirectoryProcessorType.TWO_FILES_PROCESSOR) {
             int executorSize = Integer.parseInt(
-                        systemConfig.getProperty(EXECUTOR_SIZE));
+                        systemConfigs.getProperty(EXECUTOR_SIZE));
             return new TwoFilesProcessor(executorSize);
         }
         throw new IncorectDirectoryProcessorException(
