@@ -8,6 +8,11 @@ import org.springframework.context.annotation.Configuration;
 
 import com.example.utils.SystemUtils;
 
+/**
+ * ALL THE COMMON CONFIGURATION WILL BE MAINTAINED HERE.
+ * 
+ * @author aishwaryt
+ */
 @Configuration
 public class CommonConfig {
 

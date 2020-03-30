@@ -17,6 +17,12 @@ import com.example.exceptions.FileChunkingException;
 import com.example.exceptions.FileInpuException;
 import com.example.messages.CustomMessages;
 
+/**
+ * IT WILL SPLIT A FILE INTO MULTIPLE SMALLER FILE. IT WORKS PROPERLY WHEN THE
+ * LINES ARE DISTRIBUTED UNIFORMLY.
+ * 
+ * @author aishwaryt
+ */
 public class FileChunker {
 
     private static final int FILE_SIZE_LIMIT = 10 * 1024 * 1024; // 10MB limit

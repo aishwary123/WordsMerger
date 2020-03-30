@@ -7,6 +7,11 @@ import java.util.concurrent.BlockingQueue;
 import com.example.exceptions.FileMergingException;
 import com.example.messages.CustomMessages;
 
+/**
+ * IT WILL PROVIDE {@code TwoFileMerger} AS THE FILE MERGER INSTANCE.S
+ * 
+ * @author aishwaryt
+ */
 public class TwoFilesProcessor extends DirectoryProcessor {
 
     public TwoFilesProcessor(final int executorSize) {

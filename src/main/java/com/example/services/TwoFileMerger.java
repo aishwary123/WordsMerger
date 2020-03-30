@@ -20,6 +20,12 @@ import com.example.exceptions.FileInpuException;
 import com.example.exceptions.FileMergingException;
 import com.example.messages.CustomMessages;
 
+/**
+ * IT WILL TAKE TWO FILE AS INPUT AND MERGE THE CONTENT OF THOSE FILE IN SORTED
+ * MANNER.
+ * 
+ * @author aishwaryt
+ */
 public class TwoFileMerger implements IFileMerger {
 
     protected File file1;

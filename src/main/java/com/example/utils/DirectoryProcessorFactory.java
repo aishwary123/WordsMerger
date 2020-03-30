@@ -9,6 +9,12 @@ import com.example.models.DirectoryProcessorType;
 import com.example.services.DirectoryProcessor;
 import com.example.services.TwoFilesProcessor;
 
+/**
+ * IT WILL CREATE THE DIRECTORY PROCESSOR INSTANCE AFTER CHECKING THE INPUT
+ * VALUE.
+ * 
+ * @author aishwaryt
+ */
 public class DirectoryProcessorFactory {
 
     private DirectoryProcessorFactory() {

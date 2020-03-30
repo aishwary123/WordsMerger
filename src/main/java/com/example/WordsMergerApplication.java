@@ -60,7 +60,7 @@ public class WordsMergerApplication implements CommandLineRunner {
                 LOGGER.error(CustomMessages.WORDS_MERGE_OPERATION_FAILED);
             }
         } finally {
-            // System.exit(SpringApplication.exit(context));
+            System.exit(SpringApplication.exit(context));
         }
 
     }
