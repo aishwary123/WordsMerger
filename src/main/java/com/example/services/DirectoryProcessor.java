@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.example.exceptions.FileChunkingException;
+import com.example.exceptions.FileInpuException;
 import com.example.messages.CustomMessages;
 
 public abstract class DirectoryProcessor {
@@ -29,27 +30,33 @@ public abstract class DirectoryProcessor {
         this.executorSize = executorSize;
     }
 
+    public int getExecutorSize() {
+        return this.executorSize;
+    }
+
     public abstract IFileMerger getFileMerger(final BlockingQueue<File> blockingQueue);
 
     public File processDirectory(File directory) {
         if (!directory.isDirectory()) {
             LOGGER.error(CustomMessages.INCORRECT_DIRECTORY_SPECIFIED);
+            throw new FileInpuException(
+                        CustomMessages.INCORRECT_DIRECTORY_SPECIFIED);
         }
         File[] files = directory.listFiles();
-        List<File> chunkedFiles = invokeFileChunking(files);
+
         BlockingQueue<File> fileList = new ArrayBlockingQueue<>(
                     2 * files.length);
-        for (File file : chunkedFiles) {
+        for (File file : files) {
             fileList.add(file);
         }
         return invokeMerge(fileList);
 
     }
 
-    public File invokeMerge(BlockingQueue<File> queue) {
+    protected File invokeMerge(BlockingQueue<File> queue) {
 
         ExecutorService executorService = Executors.newFixedThreadPool(
-                    executorSize);
+                    getExecutorSize());
         List<Future<Void>> futureList = new CopyOnWriteArrayList<>();
         boolean pendingThread = true;
         do {
@@ -81,11 +88,14 @@ public abstract class DirectoryProcessor {
 
     }
 
-    public List<File> invokeFileChunking(File[] files) {
+    /**
+     * NOT NEEDED HERE AS THE FILE HAS TO MERGE BACK.
+     */
+    protected List<File> invokeFileChunking(File[] files) {
 
         try {
             ExecutorService executorService = Executors.newFixedThreadPool(
-                        executorSize);
+                        getExecutorSize());
 
             CompletionService<File> executorCompletionService = new ExecutorCompletionService<>(
                         executorService);

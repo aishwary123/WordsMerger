@@ -18,7 +18,7 @@ public class CommonConfigCustomTest {
     CommonConfig commonConfig;
 
     @Test
-    public void testSystemConfigWithDefaultValues() {
+    public void testSystemConfigWithCustomValues() {
         Properties p = commonConfig.systemConfigs();
         Assert.assertEquals(commonConfig.systemConfigs().getProperty(
                     CommonConfig.EXECUTOR_SIZE), "10");

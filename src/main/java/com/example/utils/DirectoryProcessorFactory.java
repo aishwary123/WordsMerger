@@ -2,16 +2,14 @@ package com.example.utils;
 
 import java.util.Properties;
 
-import com.example.exceptions.IncorectDirectoryProcessorException;
+import com.example.configs.CommonConfig;
+import com.example.exceptions.IncorrectDirectoryProcessorException;
 import com.example.messages.CustomMessages;
 import com.example.models.DirectoryProcessorType;
 import com.example.services.DirectoryProcessor;
 import com.example.services.TwoFilesProcessor;
 
 public class DirectoryProcessorFactory {
-
-    private static final String EXECUTOR_SIZE = "EXECUTOR_SIZE";
-    private static final String FILE_MERGE_SIZE = "FILE_MERGE_SIZE";
 
     private DirectoryProcessorFactory() {
         throw new IllegalStateException(CustomMessages.FACTORY_CLASS);
@@ -22,12 +20,12 @@ public class DirectoryProcessorFactory {
                     "systemConfigs");
         if (DirectoryProcessorType.fromOrdinal(
                     Integer.parseInt(systemConfigs.getProperty(
-                                FILE_MERGE_SIZE))) == DirectoryProcessorType.TWO_FILES_PROCESSOR) {
+                                CommonConfig.FILE_MERGE_SIZE))) == DirectoryProcessorType.TWO_FILES_PROCESSOR) {
             int executorSize = Integer.parseInt(
-                        systemConfigs.getProperty(EXECUTOR_SIZE));
+                        systemConfigs.getProperty(CommonConfig.EXECUTOR_SIZE));
             return new TwoFilesProcessor(executorSize);
         }
-        throw new IncorectDirectoryProcessorException(
+        throw new IncorrectDirectoryProcessorException(
                     CustomMessages.INCORRECT_PROCESSOR_TYPE_SPECIFIED);
     }
 
