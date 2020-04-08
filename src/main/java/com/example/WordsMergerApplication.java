@@ -40,10 +40,12 @@ public class WordsMergerApplication implements CommandLineRunner {
 
         try {
             final String sourceDirectory = System.getenv(SOURCE_DIRECTORY);
-            if (Strings.isEmpty(sourceDirectory) && LOGGER.isErrorEnabled()) {
-                LOGGER.error(CustomMessages.INCORRECT_INPUT_DETAILS.concat(
+            if (Strings.isEmpty(sourceDirectory)) {
+                if(LOGGER.isErrorEnabled()){
+                    LOGGER.error(CustomMessages.INCORRECT_INPUT_DETAILS.concat(
                             CustomMessages.EXCEPTION_MESSAGE_PLACEHOLDER),
                             CustomMessages.SOURCE_DIRECTORY_VALUE_MISSING);
+                }
                 throw new FileInpuException(
                             CustomMessages.INCORRECT_INPUT_DETAILS.concat(
                                         CustomMessages.SOURCE_DIRECTORY_VALUE_MISSING));
